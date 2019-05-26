@@ -1,6 +1,5 @@
 import cv2
 import numpy as np
-import matplotlib.pyplot as plt
 
 import torch
 from model.naimishnet import NaimishNet
@@ -27,15 +26,9 @@ net.load_state_dict(torch.load('saved_models/mymodel.pt', map_location=device))
 
 image_copy = np.copy(image_rgb)
 
-w_padding = 50
-h_padding = 50
-
-# index for printing the image
-i = 0
-
 for (x, y, w, h) in faces:
     # Select the region of interest
-    roi = image_copy[y - h_padding : y + h + h_padding, x - w_padding : x + w + w_padding]
+    roi = image_copy[y : y + h, x : x + w]
 
     # Convert the face region from BGR to gray scale
     image_gray = cv2.cvtColor(roi, cv2.COLOR_RGB2GRAY)
@@ -69,6 +62,3 @@ for (x, y, w, h) in faces:
     cv2.imshow('Image', image_resized)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-    
-
-    i += 1
