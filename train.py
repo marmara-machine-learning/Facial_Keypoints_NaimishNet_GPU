@@ -72,6 +72,7 @@ def train_net(neural_net, n_epochs, criterion, train_loader, optimizer_type, lr)
                 print("Epoch: {}, Batch: {}, Avg. Loss: {}".format(epoch + 1, batch_i + 1,
                                                                    running_loss / 1000))
                 
+                # Write parameters to a csv file
                 param_list = np.array([[epoch+1, batch_i+1, running_loss, lr]])
                 df = pd.DataFrame(param_list, columns=['Epoch', 'Batch', 'Loss', 'LR'])
                 df.to_csv('param_file.csv', mode='a', header='False')
