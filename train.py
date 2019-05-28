@@ -1,3 +1,6 @@
+import numpy as np
+import pandas as pd
+
 import torch
 import torch.nn as nn  # Neural network
 import torch.optim as optim  # Various optimization algorithms
@@ -68,6 +71,11 @@ def train_net(neural_net, n_epochs, criterion, train_loader, optimizer_type, lr)
             if batch_i % 10 == 9:  # Print every 10 batches
                 print("Epoch: {}, Batch: {}, Avg. Loss: {}".format(epoch + 1, batch_i + 1,
                                                                    running_loss / 1000))
+                
+                param_list = np.array([[epoch+1, batch_i+1, running_loss, lr]])
+                df = pd.DataFrame(param_list, columns=['Epoch', 'Batch', 'Loss', 'LR'])
+                df.to_csv('param_file.csv', mode='a', header='False')
+                
                 running_loss = 0.0
 
             print("Training has been finished!")
