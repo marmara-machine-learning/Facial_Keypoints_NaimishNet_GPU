@@ -10,7 +10,7 @@ image = cv2.imread('samples_to_predict/mona_lisa.jpg')
 image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 # Load haar cascade for detecting frontal faces
-face_cascade = cv2.CascadeClassifier('detector_architectures/haarcascade_frontalface_default.xml')
+face_cascade = cv2.CascadeClassifier('detector_arch/haarcascade_frontalface_default.xml')
 
 # Run the face detector
 faces = face_cascade.detectMultiScale(image, 1.2, 2)
