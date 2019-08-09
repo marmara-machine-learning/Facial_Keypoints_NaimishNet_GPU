@@ -140,4 +140,4 @@ if __name__ == "__main__":
     neural_net = NaimishNet()
     # Try various combinations. (epoch, batches, optimizer type, learning rate)
     # test_multiple_setups(1, [8, 12, 32, 64], ["Adam", "SGD", "RMS"], [0.001, 0.005, 0.01])
-    train_and_save(1, 64, "SGD", 0.1, "./saved_models/mymodel.pt")
+    train_and_save(64, 64, "SGD", 0.1, "./saved_models/mymodel.pt")
