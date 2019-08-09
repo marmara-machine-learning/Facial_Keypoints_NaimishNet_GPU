@@ -6,7 +6,7 @@ from model.naimishnet import NaimishNet
 
 
 # Load an image and convert it to BGR to RGB
-image = cv2.imread('samples_to_predict/mona_lisa.jpg')
+image = cv2.imread('./Sample_Image.jpg', cv2.IMREAD_COLOR)
 image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 # Load haar cascade for detecting frontal faces
