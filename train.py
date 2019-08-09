@@ -16,6 +16,9 @@ from utils.to_tensor import ToTensor
 
 from model.naimishnet import NaimishNet
 
+import os
+import errno
+
 
 def train_net(neural_net, n_epochs, criterion, train_loader, optimizer_type, lr):
     print(neural_net)
@@ -121,6 +124,12 @@ def train_and_save(n_epoch, batch_size, optimizer, learning_rate, path):
 
 
 if __name__ == "__main__":
+    try:
+        os.makedirs('./saved_models')
+        os.rm
+    except OSError as e:
+        if e.errno != errno.EEXIST:
+            raise
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
     print(device)
     neural_net = NaimishNet()
