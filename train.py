@@ -78,7 +78,8 @@ def train_net(neural_net, n_epochs, criterion, train_loader, optimizer_type, lr)
                 # Write parameters to a csv file
                 param_list = np.array([[epoch+1, batch_i+1, running_loss, lr]])
                 df = pd.DataFrame(param_list, columns=['Epoch', 'Batch', 'Loss', 'LR'])
-                df.to_csv('param_file.csv', mode='a', header='False')
+                with open('param_file.csv', 'a') as f:
+                    df.to_csv(f, header=f.tell() == 0)
                 
                 running_loss = 0.0
 
@@ -125,8 +126,12 @@ def train_and_save(n_epoch, batch_size, optimizer, learning_rate, path):
 
 if __name__ == "__main__":
     try:
-        os.makedirs('./saved_models')
-        os.rm
+        if os.path.exists('./saved_models/mymodel.pt'):
+            print("Deleting old model file...")
+            os.remove("./saved_models/mymodel.pt")
+            os.remove("./param_file.csv")
+        else:
+            os.makedirs('./saved_models')
     except OSError as e:
         if e.errno != errno.EEXIST:
             raise
